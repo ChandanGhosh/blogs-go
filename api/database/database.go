@@ -1,31 +1,19 @@
 package database
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/chandanghosh/blog/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-var BlogDB *gorm.DB
-
-// func init() {
-// 	var err error
-// 	BlogDB, err = gorm.Open(mysql.Open(config.DBURI), &gorm.Config{})
-// 	if err != nil {
-// 		log.Fatalf("Error openning DB connection: %v", err)
-// 	}
-
-// }
-
-// Connect ..
-func Connect() error {
-	var err error
-	BlogDB, err = gorm.Open(mysql.Open(config.DBURI), &gorm.Config{})
+// ConnectMySQL ..
+func ConnectMySQL() *gorm.DB {
+	db, err := gorm.Open(mysql.Open(config.DBURI), &gorm.Config{})
 	if err != nil {
-		fmt.Printf("Error opening database; %v", err)
-		return err
+		log.Println(err)
 	}
-	return nil
+
+	return db
 }

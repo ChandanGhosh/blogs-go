@@ -32,7 +32,7 @@ func VerifyPassword(hashedPassword, passwordFromUser string) error {
 // BeforeSave ..
 func (u *User) BeforeSave(*gorm.DB) error {
 	if u.Password == "" {
-		return fmt.Errorf("Can't save user as the password is invalid, %s", u.Password)
+		return fmt.Errorf("can't save user as the password is invalid, %s", u.Password)
 	}
 
 	b, err := GenerateHashedPassword(u.Password)

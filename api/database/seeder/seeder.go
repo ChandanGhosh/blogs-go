@@ -10,20 +10,15 @@ import (
 
 // SeedDatabase ..
 func SeedDatabase() {
-	err := database.Connect()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = database.BlogDB.Debug().AutoMigrate(&models.User{})
+	db := database.ConnectMySQL()
+	err := db.Debug().AutoMigrate(&models.User{})
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for _, user := range users {
-
-		err = database.BlogDB.Debug().Model(&models.User{}).Create(&user).Error
+		err = db.Debug().Model(&models.User{}).Create(&user).Error
 		if err != nil {
 			log.Fatal(err)
 		}
